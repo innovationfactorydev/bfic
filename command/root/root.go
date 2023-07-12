@@ -34,7 +34,7 @@ type RootCommand struct {
 func NewRootCommand() *RootCommand {
 	rootCommand := &RootCommand{
 		baseCmd: &cobra.Command{
-			Short: "Polygon Edge is a framework for building Ethereum-compatible Blockchain networks",
+			Short: "BFIC Blockchain is an Ethereum fork for layer 2 solutions.",
 		},
 	}
 
