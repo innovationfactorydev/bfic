@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  node:
+    image: innovationfactory/bfic:latest
+    working_dir: /app
+    entrypoint: ""
+    command: "bfic server --data-dir chain-data --secrets-config ./secretsManagerConfig.json --chain ./genesis.json --grpc-address :10000 --libp2p :30301 --jsonrpc :8545 --seal"
+    volumes:
+      - /home/ubuntu/mybfic:/app
+    ports:
+      - "3003:3003"
+      - "30301:30301"
+      - "3004:3004"
+networks:
+  default:
+    name: bfic-network
