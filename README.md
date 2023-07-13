@@ -27,16 +27,13 @@ A cross-chain protocol to bridge Ethereum compatible Blockchains with other Bloc
 
 ## BFIC Blockchain Node Deployment
 
-Below is the process used for deploying a production grade BFIC Blockchain node.
-
-## Steps
-
+Refer to the process below for deploying a production grade BFIC Blockchain node and syncing it with the BFIC network. 
 - Clone code from the repository & build binary
 - Create a secret configuration, utilizing any secret manager (AWS, Hashicorp etc.)
 - Generate secrets
-- Start node
+- Start the node
 
-## Clone & Build
+### Clone repo & build binary
 
 Clone the repository on your machine and build.
 
@@ -46,7 +43,7 @@ make build
 mv ./bfic /usr/local/bin/
 ```
 
-## Create Secrets
+### Generate secrets
 
 To create a secrets configuration, we'll supply the url of the key vault & token to the "init" command to store the secrets in it after creation.
 
@@ -67,8 +64,8 @@ BLS Public key       = 0x87b756961fa6304becf5156177a782e22f0b077ad2bef02f0b175a7
 Node ID              = 16Uiu2HAm6CVzf6VfHqR5WnFwZCdBreiGaZsqU2McXBVTjqfzUTe7
 ```
 
-## Start the node
+### Start the node
 
 ```bash
-bfic server --data-dir chain-data --secrets-config ./secretsManagerConfig.json --chain ./genesis.json --grpc-address :10000 --libp2p :30301 --jsonrpc :10002 --seal
+bfic server --data-dir chain-data --secrets-config ./secretsManagerConfig.json --chain ./genesis.json --grpc-address :10000 --libp2p :30301 --jsonrpc :8545 --seal
 ```
