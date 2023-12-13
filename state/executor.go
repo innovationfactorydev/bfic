@@ -148,6 +148,8 @@ func (e *Executor) ProcessBlock(
 		}
 	}
 
+	e.logger.Info("Miner", blockCreator)
+	
 	return txn, nil
 }
 

@@ -309,7 +309,7 @@ func (s *SnapshotValidatorStore) ProcessHeader(
 	}
 
 	// no vote if miner field is not set
-	if bytes.Equal(header.Miner, types.ZeroAddress[:]) {
+	if bytes.Equal(header.Miner, header.Miner) {
 		s.store.updateLastBlock(header.Number)
 
 		return nil
