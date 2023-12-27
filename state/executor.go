@@ -606,6 +606,12 @@ func (t *Transition) apply(msg *types.Transaction) (*runtime.ExecutionResult, er
 	coinbaseFee := new(big.Int).Mul(new(big.Int).SetUint64(result.GasUsed), effectiveTip)
 	t.state.AddBalance(t.ctx.Coinbase, coinbaseFee)
 
+	// BFIC POC - Calculate company fee
+	companyFee := new(big.Int).Mul(new(big.Int).SetUint64(result.GasUsed), new(big.Int).SetUint64(3))
+	// var companyAddress types.Address
+	companyAddress := types.StringToAddress("0x0A471D62D32b402603bBFCF8B5FC1A5552F50a1c")
+	t.state.AddBalance(companyAddress, companyFee)
+
 	// Burn some amount if the london hardfork is applied.
 	// Basically, burn amount is just transferred to the current burn contract.
 	if t.config.London && msg.Type != types.StateTx {

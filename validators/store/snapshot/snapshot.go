@@ -293,9 +293,9 @@ func (s *SnapshotValidatorStore) ProcessHeader(
 		return ErrSnapshotNotFound
 	}
 
-	if !parentSnap.Set.Includes(proposer) {
-		return ErrUnauthorizedProposer
-	}
+	// if !parentSnap.Set.Includes(proposer) {
+	// 	return ErrUnauthorizedProposer
+	// }
 
 	snap := parentSnap.Copy()
 
