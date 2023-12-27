@@ -5,7 +5,7 @@ secretsManagerConfig.json
 *-packr.go
 config*.json
 polygon-edge
-
+bfic
 bin/
 
 test-chain*
