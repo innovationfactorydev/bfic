@@ -39,13 +39,15 @@ Clone the repository on your machine and build.
 
 ```bash
 git clone https://github.com/innovationfactorydev/bfic.git
+git checkout origin/v1.3.1
 make build
 mv ./bfic /usr/local/bin/
 ```
 
 ### Generate secrets
 
-To create a secrets configuration, we'll supply the url of the key vault & token to the "init" command to store the secrets in it after creation.
+#### Using a secret manager (Hashicorp or AWS etc.)
+To create a secure secrets configuration, we'll supply the url of the key vault & token to the ```generate``` command and then pass the resulting config file to the ```init``` to store the secrets in it.
 
 ```bash
 bfic secrets generate --name secretManager --token my-secure-token --server-url https://SECRETS_MANAGER_URL
@@ -54,8 +56,7 @@ bfic secrets generate --name secretManager --token my-secure-token --server-url 
 ```bash
 bfic secrets init --config ./secretsManagerConfig.json
 ```
-
-#### The above commands will store the secrets in the specified key vault and print the following (example).
+##### The above commands will store the secrets in the specified key vault and print the following (example).
 
 ```bash
 [SECRETS INIT]
@@ -64,8 +65,15 @@ BLS Public key       = 0x87b756961fa6304becf5156177a782e22f0b077ad2bef02f0b175a7
 Node ID              = 16Uiu2HAm6CVzf6VfHqR5WnFwZCdBreiGaZsqU2McXBVTjqfzUTe7
 ```
 
-### Start the node
+#### Using the filesystem
+There's also another method to store the secrets on the filesystem if a secret manager is not available, although its not recommended for production.
 
 ```bash
-bfic server --data-dir chain-data --secrets-config ./secretsManagerConfig.json --chain ./genesis.json --grpc-address :10000 --libp2p :30301 --jsonrpc :8545 --seal
+bfic secrets init --insecure --data-dir ./chain-data
+```
+This will create and store the node credentials in the specified directory.
+### Start the node
+Omit the ```--secrets-config ./secretsManagerConfig.json``` in case of filesystem credentials.
+```bash
+bfic server --data-dir ./chain-data --secrets-config ./secretsManagerConfig.json --chain ./genesis.json --grpc-address :10000 --libp2p :30301 --jsonrpc :8545 --seal
 ```
