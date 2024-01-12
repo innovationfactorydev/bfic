@@ -735,9 +735,9 @@ func (br *BlockResult) verifyBlockResult(referenceBlock *types.Block) error {
 	}
 
 	// Make sure the world state root matches up
-	// if br.Root != referenceBlock.Header.StateRoot {
-	// 	return ErrInvalidStateRoot
-	// }
+	if br.Root != referenceBlock.Header.StateRoot {
+		return ErrInvalidStateRoot
+	}
 
 	// Make sure the gas used is valid
 	if br.TotalGas != referenceBlock.Header.GasUsed {
